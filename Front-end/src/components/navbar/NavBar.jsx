@@ -7,7 +7,10 @@ const MainNav = styled.nav`
   padding: 5px 20px;
 `;
 
-const MainNavLogoContainer = styled.div``;
+const MainNavLogoContainer = styled.div`
+margin: 0;
+padding: 0;
+height: 100%;`;
 
 const MainNaveLogo = styled.img`
   width: 200px;
