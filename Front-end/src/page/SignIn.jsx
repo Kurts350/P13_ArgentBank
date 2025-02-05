@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const SignInContainer = styled.div`
   display: block;
@@ -70,10 +71,16 @@ const SignInButton = styled.button`
 `;
 
 export const SignIn = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/user');
+  };
   return (
     <SignInContainer>
       <MainBgDark>
-        <SignInContent>
+        <SignInContent onSubmit={handleSubmit}>
           <Icon className="fa fa-user-circle" />
           <SignInTitle>Sign In</SignInTitle>
           <InputWrapper>
@@ -88,7 +95,7 @@ export const SignIn = () => {
             <Input type="checkbox" />
             <LabelRemember htmlFor="remerber-me">Remember me</LabelRemember>
           </InputRemember>
-          <SignInButton>Sign In</SignInButton>
+          <SignInButton type='submit'>Sign In</SignInButton>
         </SignInContent>
       </MainBgDark>
     </SignInContainer>

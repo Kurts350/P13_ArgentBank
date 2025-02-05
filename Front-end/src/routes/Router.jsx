@@ -3,6 +3,7 @@ import {HomePage} from '../page/HomePage';
 import {Layout} from '../layout/Layout';
 import { ErrorPage404 } from "../page/ErrorPage404";
 import { SignIn } from "../page/SignIn";
+import { User } from "../page/User";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path:"/sign-in",
         element: <SignIn />
+      },
+      {
+        path:"/user",
+        element: <User  />
       }
     ],
   },
