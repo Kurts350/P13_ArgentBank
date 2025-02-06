@@ -36,8 +36,10 @@ const ButtonAccount = styled.button`
   background-color: #00bc77;
   border-color: #00bc77;
   color: #fff;
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
-
 
 const AccountContainer = styled.div`
   display: flex;
@@ -52,10 +54,15 @@ const AccountContainer = styled.div`
   box-sizing: border-box;
   text-align: left;
   margin-bottom: 2rem;
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
 `;
 
 const AccountContentWrapper = styled.div`
-
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 const AccountTitle = styled.h3`
@@ -71,11 +78,14 @@ const AccountAmount = styled.p`
   font-weight: bold;
 `;
 const AccountAmountDescription = styled.p`
-margin: 0;
+  margin: 0;
 `;
 
 const AccountContentWrapperCta = styled.div`
-`
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+`;
 
 export const User = () => {
   return (
@@ -92,9 +102,7 @@ export const User = () => {
         <AccountContentWrapper>
           <AccountTitle>Argent Bank Checking (x8349)</AccountTitle>
           <AccountAmount>$2,082.79</AccountAmount>
-          <AccountAmountDescription>
-          Available Balance
-          </AccountAmountDescription>
+          <AccountAmountDescription>Available Balance</AccountAmountDescription>
         </AccountContentWrapper>
         <AccountContentWrapperCta>
           <ButtonAccount>View transactions</ButtonAccount>
@@ -104,9 +112,7 @@ export const User = () => {
         <AccountContentWrapper>
           <AccountTitle>Argent Bank Savings (x6712)</AccountTitle>
           <AccountAmount>$10,928.42</AccountAmount>
-          <AccountAmountDescription>
-          Available Balance
-          </AccountAmountDescription>
+          <AccountAmountDescription>Available Balance</AccountAmountDescription>
         </AccountContentWrapper>
         <AccountContentWrapperCta>
           <ButtonAccount>View transactions</ButtonAccount>
@@ -116,9 +122,7 @@ export const User = () => {
         <AccountContentWrapper>
           <AccountTitle>Argent Bank Credit Card (x8349)</AccountTitle>
           <AccountAmount>$184.30</AccountAmount>
-          <AccountAmountDescription>
-          Current Balance
-          </AccountAmountDescription>
+          <AccountAmountDescription>Current Balance</AccountAmountDescription>
         </AccountContentWrapper>
         <AccountContentWrapperCta>
           <ButtonAccount>View transactions</ButtonAccount>

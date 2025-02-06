@@ -7,6 +7,11 @@ const HeroContainer = styled.div`
   height: 400px;
   background-position: 0% 33%;
   background-size: cover;
+
+  @media (max-width: 920px) {
+    height: 300px;
+    background-position: 0 -50px;
+  }
 `;
 
 const HeroContent = styled.div`
@@ -18,12 +23,25 @@ const HeroContent = styled.div`
   margin: 2rem;
   padding: 2rem;
   text-align: left;
+
+  @media (max-width: 920px) {
+  position: relative;
+    top: 2rem;
+    width: 200px;
+    margin: 0 auto;
+    right: 0;
+}
+  }
 `;
 
 const HeroContentBoldText = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
+
+  @media (max-width: 920px) {
+    font-size: 1rem;
+  }
 `;
 
 const HeroContentText = styled.p`
@@ -31,7 +49,9 @@ const HeroContentText = styled.p`
   font-weight: 200;
   margin: 0;
   margin-top: 1rem;
-
+    @media (max-width: 920px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const HomeBanner = () => {

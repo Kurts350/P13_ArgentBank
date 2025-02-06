@@ -5,11 +5,19 @@ import iconSecurity from '../../assets/img/icon-security.png';
 
 const FeaturesContainer = styled.div`
   display: flex;
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `;
 const FeatureItem = styled.div`
   padding: 2.5rem;
   width: 33.33%;
   text-align: center;
+  box-sizing: border-box;
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 const FeatureIcon = styled.img`
   width: 100px;
@@ -26,7 +34,7 @@ const FeatureTitle = styled.h3`
 `;
 
 const FeatureText = styled.p`
-font-weight: 200;
+  font-weight: 200;
 `;
 
 export const Features = () => {
