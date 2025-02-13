@@ -15,7 +15,7 @@ const MainNavLogoContainer = styled(NavLink)`
   height: 100%;
 `;
 
-const MainNaveLogo = styled.img`
+const MainNavLogo = styled.img`
   width: 200px;
 `;
 
@@ -44,7 +44,6 @@ const MainNavTitle = styled.span`
   font-weight: 500;
   color: #2c3e50;
 `;
-
 export const NavBar = () => {
   const location = useLocation();
   const isUserPage = location.pathname === '/user';
@@ -52,12 +51,12 @@ export const NavBar = () => {
     <>
       <MainNav>
         <MainNavLogoContainer to="/">
-          <MainNaveLogo src={logo} alt="Argent Bank Logo" />
+          <MainNavLogo src={logo} alt="Argent Bank Logo" />
         </MainNavLogoContainer>
 
         {isUserPage ? (
           <MainNavItemContainer>
-            <MainNavItem to="/sign-in">
+            <MainNavItem to="#" onClick={(e) => e.preventDefault()}>
               <MainNavIcon className="fa fa-user-circle" />
               <MainNavTitle>Tony</MainNavTitle>
             </MainNavItem>
@@ -67,7 +66,7 @@ export const NavBar = () => {
             </MainNavItem>
           </MainNavItemContainer>
         ) : (
-          <MainNavItem to="/sign-in">
+          <MainNavItem to="/login">
             <MainNavIcon className="fa fa-user-circle" />
             <MainNavTitle>Sign In</MainNavTitle>
           </MainNavItem>

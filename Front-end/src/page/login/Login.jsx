@@ -70,12 +70,12 @@ const SignInButton = styled.button`
     color: #fff;
 `;
 
-export const SignIn = () => {
+export const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/user');
+    navigate('/profile');
   };
   return (
     <SignInContainer>

@@ -87,7 +87,7 @@ const AccountContentWrapperCta = styled.div`
   }
 `;
 
-export const User = () => {
+export const Profile = () => {
   return (
     <MainBgDark>
       <UserHeader>
