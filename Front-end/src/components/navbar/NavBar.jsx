@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import logo from '../../assets/img/argentBankLogo.png';
 import { NavLink } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../features/auth/authSlice';
 
 const MainNav = styled.nav`
   display: flex;
@@ -45,8 +46,15 @@ const MainNavTitle = styled.span`
   color: #2c3e50;
 `;
 export const NavBar = () => {
-  const location = useLocation();
-  const isUserPage = location.pathname === '/user';
+  // On utilise useSelector pour obtenir les informations de l'utilisateur depuis Redux
+  const { isAuthenticated, user } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  // Fonction de déconnexion
+  const handleSignOut = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <MainNav>
@@ -54,13 +62,13 @@ export const NavBar = () => {
           <MainNavLogo src={logo} alt="Argent Bank Logo" />
         </MainNavLogoContainer>
 
-        {isUserPage ? (
+        {isAuthenticated ? (
           <MainNavItemContainer>
-            <MainNavItem to="#" onClick={(e) => e.preventDefault()}>
+            <MainNavItem to="/profile">
               <MainNavIcon className="fa fa-user-circle" />
-              <MainNavTitle>Tony</MainNavTitle>
+              <MainNavTitle>{user?.firstName || 'User'}</MainNavTitle>
             </MainNavItem>
-            <MainNavItem to="/">
+            <MainNavItem to="/" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
               <MainNavTitle>Sign Out</MainNavTitle>
             </MainNavItem>
