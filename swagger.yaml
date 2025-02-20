@@ -70,6 +70,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -93,6 +94,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Update user profile attributes
@@ -110,11 +112,265 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+
+  # TRANSACTION MODULE ENDPOINTS
+  /user/accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get all transactions for an account
+      description: Retrieves all transactions for the current month, grouped by account
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: ID of the account
+          required: true
+          type: string
+        - in: query
+          name: month
+          description: Month for transactions (current month by default)
+          required: false
+          type: string
+          format: YYYY-MM
+        - in: query
+          name: page
+          description: Page number for pagination
+          required: false
+          type: integer
+          default: 1
+        - in: query
+          name: limit
+          description: Number of transactions per page
+          required: false
+          type: integer
+          default: 10
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+              body:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  accountName:
+                    type: string
+                  balance:
+                    type: number
+                  currency:
+                    type: string
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Transaction'
+                  pagination:
+                    $ref: '#/definitions/Pagination'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+  
+  /user/accounts/{accountId}/transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get transaction details
+      description: Retrieves details for a specific transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: ID of the account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+              body:
+                $ref: '#/definitions/TransactionDetail'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update transaction information
+      description: Updates additional information for a specific transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: ID of the account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Transaction information to update
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+              body:
+                $ref: '#/definitions/TransactionDetail'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+          
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Delete transaction information
+      description: Deletes additional information for a specific transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: ID of the account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction information deleted successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Get all user accounts
+      description: Retrieves all accounts associated with the authenticated user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Accounts retrieved successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+              body:
+                type: array
+                items:
+                  $ref: '#/definitions/Account'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+
 securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
     in: header
+
 definitions:
   User:
     properties:
@@ -164,3 +420,111 @@ definitions:
         type: string
       lastName:
         type: string
+
+  # TRANSACTION MODULE DEFINITIONS
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Transaction ID
+      date:
+        type: string
+        format: date
+        description: Transaction date
+      description:
+        type: string
+        description: Transaction description
+      amount:
+        type: number
+        description: Transaction amount
+      type:
+        type: string
+        description: Transaction type (debit/credit)
+      category:
+        type: string
+        description: Transaction category
+      notes:
+        type: string
+        description: User notes about transaction
+  
+  TransactionDetail:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Transaction ID
+      accountId:
+        type: string
+        description: Account ID
+      date:
+        type: string
+        format: date
+        description: Transaction date
+      description:
+        type: string
+        description: Transaction description
+      amount:
+        type: number
+        description: Transaction amount
+      balance:
+        type: number
+        description: Balance after transaction
+      type:
+        type: string
+        description: Transaction type (debit/credit)
+      category:
+        type: string
+        description: Transaction category
+      notes:
+        type: string
+        description: User notes about transaction
+      createdAt:
+        type: string
+        format: date-time
+        description: Transaction creation date
+      updatedAt:
+        type: string
+        format: date-time
+        description: Transaction last update date
+  
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+        description: Transaction category
+      notes:
+        type: string
+        description: User notes about transaction
+  
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Account ID
+      name:
+        type: string
+        description: Account name
+      balance:
+        type: number
+        description: Current balance
+      type:
+        type: string
+        description: Account type (Checking, Savings, etc.)
+      currency:
+        type: string
+        description: Account currency
+  
+  Pagination:
+    type: object
+    properties:
+      currentPage:
+        type: integer
+      totalPages:
+        type: integer
+      itemsPerPage:
+        type: integer
+      totalItems:
+        type: integer

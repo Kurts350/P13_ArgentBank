@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "populate-db",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: populate-db",
+			"presentation": {
+				"reveal": "silent"
+			}
+		}
+	]
+}

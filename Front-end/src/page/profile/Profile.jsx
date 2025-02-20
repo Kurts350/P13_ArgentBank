@@ -95,13 +95,17 @@ const AccountContentWrapperCta = styled.div`
   }
 `;
 
-// Nouveaux styled components pour le formulaire d'édition
 const EditForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1rem;
 `;
+const EditConatiner = styled.div`
+  display: flex;
+  gap: 1rem;
+  `
+
 
 const EditInput = styled.input`
   padding: 0.5rem;
@@ -124,7 +128,7 @@ export const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState({
     firstName: '',
-    lastName: ''
+    lastName: '',
   });
 
   // Récupérer les données du profil au chargement
@@ -137,12 +141,12 @@ export const Profile = () => {
     if (user) {
       setEditedName({
         firstName: user.firstName || '',
-        lastName: user.lastName || ''
+        lastName: user.lastName || '',
       });
     }
   }, [user]);
 
-  const handleEdit = async (e) => {
+  const handleEdit = async e => {
     e.preventDefault();
     const result = await dispatch(updateUserProfile(editedName));
     if (result.meta.requestStatus === 'fulfilled') {
@@ -156,38 +160,48 @@ export const Profile = () => {
   return (
     <MainBgDark>
       <UserHeader>
+        <UserTitle>
+          Welcome back
+          <br />
+          <span>
+            {user?.firstName} {user?.lastName}!
+          </span>
+        </UserTitle>
         {!isEditing ? (
           <>
-            <UserTitle>
-              Welcome back
-              <br />
-              <span>{user?.firstName} {user?.lastName}!</span>
-            </UserTitle>
             <Button onClick={() => setIsEditing(true)}>Edit Name</Button>
           </>
         ) : (
           <EditForm onSubmit={handleEdit}>
-            <EditInput
-              type="text"
-              value={editedName.firstName}
-              onChange={(e) => setEditedName({
-                ...editedName,
-                firstName: e.target.value
-              })}
-              placeholder="First Name"
-            />
-            <EditInput
-              type="text"
-              value={editedName.lastName}
-              onChange={(e) => setEditedName({
-                ...editedName,
-                lastName: e.target.value
-              })}
-              placeholder="Last Name"
-            />
+            <EditConatiner>
+              <EditInput
+                type="text"
+                value={editedName.firstName}
+                onChange={e =>
+                  setEditedName({
+                    ...editedName,
+                    firstName: e.target.value,
+                  })
+                }
+                placeholder="First Name"
+              />
+              <EditInput
+                type="text"
+                value={editedName.lastName}
+                onChange={e =>
+                  setEditedName({
+                    ...editedName,
+                    lastName: e.target.value,
+                  })
+                }
+                placeholder="Last Name"
+              />
+            </EditConatiner>
             <EditButtons>
               <Button type="submit">Save</Button>
-              <Button type="button" onClick={() => setIsEditing(false)}>Cancel</Button>
+              <Button type="button" onClick={() => setIsEditing(false)}>
+                Cancel
+              </Button>
             </EditButtons>
           </EditForm>
         )}
