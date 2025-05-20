@@ -3,6 +3,7 @@ import logo from '../../assets/img/argentBankLogo.png';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const MainNav = styled.nav`
   display: flex;
@@ -46,6 +47,7 @@ const MainNavTitle = styled.span`
   color: #2c3e50;
 `;
 export const NavBar = () => {
+  const navigate = useNavigate();
   // On utilise useSelector pour obtenir les informations de l'utilisateur depuis Redux
   const { isAuthenticated, user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ export const NavBar = () => {
   // Fonction de déconnexion
   const handleSignOut = () => {
     dispatch(logout());
+    navigate('/login', { replace: true });
   };
 
   return (

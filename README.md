@@ -1,72 +1,101 @@
-# Project #10 - Argent Bank API
+# Projet #13 - Argent Bank API
 
-This codebase contains the code needed to run the backend for Argent Bank.
+Ce dépôt contient le code nécessaire pour exécuter le backend d'Argent Bank.
 
-## Getting Started
+## 🎯 Objectifs
+* Mettre en place une API bancaire sécurisée
+* Implémenter un système d'authentification des utilisateurs
+* Développer un système de gestion de profil utilisateur
+* Préparer la documentation pour de futures fonctionnalités (transactions)
 
-### Prerequisites
+## 🛠️ Technologies utilisées
+* **Node.js** (v12)
+* **MongoDB** (Community Server)
+* **Express**
+* **JavaScript** (ES6+)
+* **JWT** (JSON Web Tokens)
+* **Swagger** (pour la documentation API)
 
-Argent Bank uses the following tech stack:
+## 📁 Structure du projet
 
-- [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+```
+argent-bank/
+├── designs/
+│   └── wireframes/
+├── server/
+│   ├── controllers/
+│   ├── database/
+│   ├── models/
+│   ├── routes/
+│   └── ...
+├── .gitignore
+├── package.json
+└── README.md
+```
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+## ▶️ Lancer le projet en local
+
+### 1. Prérequis
+
+Vérifiez que vous disposez des bonnes versions:
 
 ```bash
-# Check Node.js version
+# Vérifier la version de Node.js
 node --version
 
-# Check Mongo version
+# Vérifier la version de MongoDB
 mongo --version
 ```
 
-### Instructions
-
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+### 2. Configurer le projet
 
 ```bash
-# Install dependencies
-npm install
+# Forkez ce dépôt
+# Clonez le dépôt sur votre ordinateur
+# Ouvrez une fenêtre de terminal dans le projet cloné
 
-# Start local dev server
+# Installer les dépendances
+npm install
+```
+
+### 3. Lancer l'application
+
+```bash
+# Démarrer le serveur de développement local
 npm run dev:server
 
-# Populate database with two users
+# Remplir la base de données avec deux utilisateurs
 npm run populate-db
 ```
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+Votre serveur sera accessible à l'adresse : `http://localhost:3001`
 
-## Populated Database Data
-
-Once you run the `populate-db` script, you should have two users in your database:
+## 👤 Utilisateurs pré-configurés
 
 ### Tony Stark
-
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+* Prénom: `Tony`
+* Nom: `Stark`
+* Email: `tony@stark.com`
+* Mot de passe: `password123`
 
 ### Steve Rogers
+* Prénom: `Steve`
+* Nom: `Rogers`
+* Email: `steve@rogers.com`
+* Mot de passe: `password456`
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+## 📚 Documentation API
+Pour en savoir plus sur le fonctionnement de l'API, une fois que vous avez démarré votre environnement local, vous pouvez visiter: `http://localhost:3001/api-docs`
 
-## API Documentation
+## 🎨 Ressources de Design
+* Le HTML et CSS statiques se trouvent dans: `/designs`
+* Maquette pour la modification du nom d'utilisateur: `/designs/wireframes/edit-user-name.png`
+* Wireframe pour le modèle de transactions: `/designs/wireframes/transactions.png`
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+## 📄 Licence
+Ce projet a été réalisé dans un but pédagogique dans le cadre de la formation OpenClassrooms – Développeur d'application JavaScript React.
 
-## Design Assets
-
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
-
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+## 👤 Auteur
+**NIAKATE Biaguy**  
+Formation Développeur d'application JavaScript React – OpenClassrooms  
+📅 Février 2025

@@ -21,6 +21,7 @@ export const fetchUserProfile = createAsyncThunk(
   }
 )
 
+
 // Action pour la connexion (déjà existante)
 export const loginUser = createAsyncThunk(
     'auth/login',
